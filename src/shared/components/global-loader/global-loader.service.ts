@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { afterNextRender, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { IGlobalLoaderParams } from '@shared/components/global-loader/IGlobalLoaderParams';
 
@@ -10,7 +10,10 @@ export class GlobalLoaderService extends BehaviorSubject<boolean> {
 
 	constructor() {
 		super(false);
-		this.handlePreventClose();
+
+		afterNextRender(() => {
+			this.handlePreventClose();
+		});
 	}
 
 	showLoader(params?: IGlobalLoaderParams) {
