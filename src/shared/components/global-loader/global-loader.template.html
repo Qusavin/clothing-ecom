@@ -1,0 +1,13 @@
+<ng-content></ng-content>
+
+<div *ngIf="showLoader$ | async" class="wrapper">
+	<div class="content">
+		<tui-loader size="xl" class="content__loader" [showLoader]="true" />
+
+		<div *ngIf="params$ | async as params" class="content__data">
+			<p class="title">{{ params.title }}</p>
+
+			<p class="text">{{ params.text }}</p>
+		</div>
+	</div>
+</div>
