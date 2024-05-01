@@ -1,4 +1,5 @@
 import {
+	afterNextRender,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
@@ -27,7 +28,7 @@ import { GlobalLoaderService } from './global-loader.service';
 	styleUrl: './global-loader.style.less',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GlobalLoaderComponent implements OnInit {
+export class GlobalLoaderComponent {
 	private readonly destroyRef = inject(DestroyRef);
 	private readonly router = inject(Router);
 	private readonly globalLoaderService = inject(GlobalLoaderService);
@@ -40,23 +41,25 @@ export class GlobalLoaderComponent implements OnInit {
 		tap(() => this.cdr.markForCheck()),
 	);
 
-	ngOnInit() {
-		this.router.events
-			.pipe(takeUntilDestroyed(this.destroyRef))
-			.subscribe((event) => {
-				switch (event.constructor) {
-					case NavigationStart:
-						this.globalLoaderService.showLoader();
+	constructor() {
+		afterNextRender(() => {
+			this.router.events
+				.pipe(takeUntilDestroyed(this.destroyRef))
+				.subscribe((event) => {
+					switch (event.constructor) {
+						case NavigationStart:
+							this.globalLoaderService.showLoader();
 
-						break;
+							break;
 
-					case NavigationEnd:
-					case NavigationError:
-					case NavigationCancel:
-						this.globalLoaderService.hideLoader();
+						case NavigationEnd:
+						case NavigationError:
+						case NavigationCancel:
+							this.globalLoaderService.hideLoader();
 
-						break;
-				}
-			});
+							break;
+					}
+				});
+		});
 	}
 }

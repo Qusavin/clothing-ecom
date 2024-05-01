@@ -1,0 +1,26 @@
+<div class="p-8 container">
+	<div class="flex items-center justify-between">
+		<div class="flex items-center">
+			<tui-svg src="ce-icons::shop"></tui-svg>
+			<div class="ml-3 text-2xl">Store</div>
+		</div>
+
+		<nav class="space-x-16">
+			<a
+				class="text-xl link transition-all"
+				[routerLink]="getLink(RoutingPath.SHOP)"
+				routerLinkActive="link_active"
+			>
+				Shop
+			</a>
+
+			<a
+				class="text-xl link transition-all"
+				[routerLink]="getLink(RoutingPath.CART)"
+				routerLinkActive="link_active"
+			>
+				<tui-svg class="cart" src="tuiIconShoppingCartLarge"></tui-svg>
+			</a>
+		</nav>
+	</div>
+</div>

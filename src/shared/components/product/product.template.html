@@ -1,0 +1,10 @@
+<img
+	class="block rounded-md transition-all cursor-pointer hover:opacity-80"
+	[src]="product().url"
+	alt="product"
+	(click)="toProduct.emit(product().id)"
+/>
+<div class="font-bold text-base uppercase mt-2">{{ product().title }}</div>
+<div class="uppercase text-base mt-1">
+	{{ product().price }} {{ product().currency| tuiCurrency }}
+</div>

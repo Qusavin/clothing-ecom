@@ -1,0 +1,30 @@
+:host {
+	display: block;
+	border-bottom: 1px solid gray;
+}
+
+.link {
+	&:hover {
+		color: var(--tui-primary);
+	}
+	&_active {
+		position: relative;
+		font-weight: bold;
+		color: var(--tui-primary);
+		&:after {
+			content: '';
+			position: absolute;
+			left: -1px;
+			top: 30px;
+			display: block;
+			height: 4px;
+			width: 100%;
+			border-radius: 10px;
+			background-color: var(--tui-primary);
+		}
+	}
+}
+
+.cart {
+	margin: 0 6px 0 0;
+}
